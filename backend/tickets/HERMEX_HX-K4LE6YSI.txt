@@ -1,0 +1,36 @@
+============================================================
+                         HERMEX
+                        E-TICKET
+============================================================
+
+BOOKING ID     : HX-K4LE6YSI
+
+FROM           : Chennai
+TO             : Bengaluru
+DATE           : 05 Oct 2026
+DEPARTURE      : 09:30 PM
+
+BUS            : CITYLINE EXPRESS 204
+TYPE           : AC SEATER
+LAYOUT         : 2 + 2
+
+------------------------------------------------------------
+PASSENGER DETAILS
+------------------------------------------------------------
+
+SEAT 01
+NAME           : bala
+AGE            : 19
+GENDER         : Male
+
+------------------------------------------------------------
+NUMBER OF SEATS : 1
+TICKET FARE     : INR 450
+CONVENIENCE FEE : INR 20
+TOTAL           : INR 470
+
+------------------------------------------------------------
+                  BOOKING CONFIRMED
+------------------------------------------------------------
+
+Thank you for travelling with HERMEX.

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HERMEX | Bus Booking</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="brand">
+        <span class="wing">◈</span>
+        <span>HERMEX</span>
+    </div>
+
+    <nav>
+        <button onclick="showHome()">Home</button>
+        <button onclick="showBookings()">My Trips</button>
+    </nav>
+</header>
+
+<main>
+
+<section id="homePage" class="page active">
+
+    <div class="hero">
+
+        <div class="hero-content">
+
+            <div class="eyebrow">SMART BUS TRAVEL</div>
+
+            <h1>
+                Your journey.<br>
+                <span>Simplified.</span>
+            </h1>
+
+            <p>
+                Search buses, choose your seats and travel with confidence.
+            </p>
+
+            <div class="search-card">
+
+                <div class="search-field">
+                    <label>FROM</label>
+                    <input id="fromInput" value="Chennai">
+                </div>
+
+                <div class="swap">⇄</div>
+
+                <div class="search-field">
+                    <label>TO</label>
+                    <input id="toInput" value="Bengaluru">
+                </div>
+
+                <div class="search-field">
+                    <label>TRAVEL DATE</label>
+                    <input id="dateInput" type="date">
+                </div>
+
+                <div class="search-field">
+                    <label>PASSENGERS</label>
+                    <select id="passengerCount">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                    </select>
+                </div>
+
+                <button class="search-btn" onclick="searchBuses()">
+                    Search Buses →
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <section class="features">
+
+        <div class="feature">
+            <div class="feature-icon">⌕</div>
+            <h3>Easy Search</h3>
+            <p>Find your perfect bus in seconds.</p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">◇</div>
+            <h3>Choose Your Seat</h3>
+            <p>Pick exactly where you want to sit.</p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">✓</div>
+            <h3>Instant Ticket</h3>
+            <p>Your e-ticket is ready immediately.</p>
+        </div>
+
+    </section>
+
+</section>
+
+
+<section id="resultsPage" class="page">
+
+    <div class="page-container">
+
+        <button class="back-btn" onclick="showHome()">← Back</button>
+
+        <div class="route-heading">
+
+            <div>
+                <span id="resultFrom">Chennai</span>
+                <span class="arrow">→</span>
+                <span id="resultTo">Bengaluru</span>
+            </div>
+
+            <span id="resultDate"></span>
+
+        </div>
+
+        <div class="section-title">
+            <div>
+                <span class="eyebrow">AVAILABLE BUSES</span>
+                <h2>Choose your ride</h2>
+            </div>
+
+            <span class="bus-count" id="busCount"></span>
+        </div>
+
+        <div id="busList"></div>
+
+    </div>
+
+</section>
+
+
+<section id="seatsPage" class="page">
+
+    <div class="booking-header">
+
+        <button class="back-btn" onclick="showResults()">← Buses</button>
+
+        <div class="steps">
+            <span class="step active">1</span>
+            <span class="line"></span>
+            <span class="step">2</span>
+            <span class="line"></span>
+            <span class="step">3</span>
+        </div>
+
+    </div>
+
+    <div class="seat-layout">
+
+        <div class="seat-area">
+
+            <div class="bus-info">
+
+                <div>
+                    <span class="eyebrow">SELECT YOUR SEATS</span>
+                    <h2 id="selectedBusName"></h2>
+                    <p id="selectedBusInfo"></p>
+                </div>
+
+                <div class="bus-rating">
+                    ★ <span id="selectedBusRating"></span>
+                </div>
+
+            </div>
+
+            <div class="bus">
+
+                <div class="driver">
+                    <span>DRIVER</span>
+                    <div class="steering">◉</div>
+                </div>
+
+                <div id="seatGrid"></div>
+
+                <div class="bus-rear">
+                    REAR OF BUS
+                </div>
+
+            </div>
+
+            <div class="legend">
+
+                <div>
+                    <span class="legend-seat available"></span>
+                    Available
+                </div>
+
+                <div>
+                    <span class="legend-seat selected"></span>
+                    Selected
+                </div>
+
+                <div>
+                    <span class="legend-seat booked"></span>
+                    Booked
+                </div>
+
+            </div>
+
+        </div>
+
+        <aside class="booking-summary">
+
+            <div class="summary-card">
+
+                <span class="eyebrow">YOUR TRIP</span>
+
+                <div class="summary-route">
+                    <strong id="summaryFrom"></strong>
+                    <span>→</span>
+                    <strong id="summaryTo"></strong>
+                </div>
+
+                <p id="summaryDate"></p>
+
+                <hr>
+
+                <h3>Selected Seats</h3>
+
+                <div id="selectedSeatsList" class="selected-seats-list">
+                    <span class="empty-selection">
+                        Select your seats
+                    </span>
+                </div>
+
+                <div class="fare-row">
+                    <span>Seats</span>
+                    <span id="seatFare">₹0</span>
+                </div>
+
+                <div class="fare-row">
+                    <span>Convenience fee</span>
+                    <span id="convenienceFee">₹0</span>
+                </div>
+
+                <hr>
+
+                <div class="total-row">
+                    <span>Total</span>
+                    <strong id="totalFare">₹0</strong>
+                </div>
+
+                <button
+                    id="continueBtn"
+                    class="primary-btn disabled"
+                    onclick="continueToPassengers()"
+                >
+                    Continue →
+                </button>
+
+            </div>
+
+        </aside>
+
+    </div>
+
+</section>
+
+
+<section id="passengerPage" class="page">
+
+    <div class="page-container narrow">
+
+        <button class="back-btn" onclick="showSeats()">← Seats</button>
+
+        <div class="progress">
+            <span class="done">1 Seats</span>
+            <span>→</span>
+            <strong>2 Passenger details</strong>
+            <span>→</span>
+            <span>3 Review</span>
+        </div>
+
+        <div class="section-title">
+            <div>
+                <span class="eyebrow">PASSENGER DETAILS</span>
+                <h2>Who's travelling?</h2>
+            </div>
+        </div>
+
+        <div id="passengerForms"></div>
+
+        <button class="primary-btn full" onclick="continueToReview()">
+            Continue to review →
+        </button>
+
+    </div>
+
+</section>
+
+
+<section id="reviewPage" class="page">
+
+    <div class="page-container narrow">
+
+        <button class="back-btn" onclick="showPassengers()">← Passengers</button>
+
+        <div class="progress">
+            <span class="done">1 Seats</span>
+            <span>→</span>
+            <span class="done">2 Passenger details</span>
+            <span>→</span>
+            <strong>3 Review</strong>
+        </div>
+
+        <div class="review-card">
+
+            <div class="review-heading">
+                <div>
+                    <span class="eyebrow">REVIEW YOUR JOURNEY</span>
+                    <h2>Almost there.</h2>
+                </div>
+            </div>
+
+            <div class="route-large">
+
+                <div>
+                    <span>FROM</span>
+                    <strong id="reviewFrom"></strong>
+                    <small id="reviewDeparture"></small>
+                </div>
+
+                <div class="route-line">
+                    ─────────●─────────
+                </div>
+
+                <div>
+                    <span>TO</span>
+                    <strong id="reviewTo"></strong>
+                    <small id="reviewArrival"></small>
+                </div>
+
+            </div>
+
+            <div class="review-bus">
+                <strong id="reviewBus"></strong>
+                <span id="reviewBusType"></span>
+            </div>
+
+            <div id="reviewPassengers"></div>
+
+            <div class="fare-box">
+
+                <div>
+                    <span>Ticket fare</span>
+                    <span id="reviewFare"></span>
+                </div>
+
+                <div>
+                    <span>Convenience fee</span>
+                    <span>₹20</span>
+                </div>
+
+                <hr>
+
+                <div class="review-total">
+                    <strong>Total</strong>
+                    <strong id="reviewTotal"></strong>
+                </div>
+
+            </div>
+
+            <button class="primary-btn full" onclick="confirmBooking()">
+                Confirm & Book
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="confirmationPage" class="page">
+
+    <div class="confirmation">
+
+        <div class="success-icon">✓</div>
+
+        <span class="eyebrow">BOOKING CONFIRMED</span>
+
+        <h1>Your journey is booked.</h1>
+
+        <p>
+            Your HERMEX ticket has been generated successfully.
+        </p>
+
+        <div class="ticket-preview">
+
+            <div class="ticket-brand">
+                HERMEX
+                <span>E-TICKET</span>
+            </div>
+
+            <div class="ticket-id">
+                <small>BOOKING ID</small>
+                <strong id="confirmationId"></strong>
+            </div>
+
+            <div class="ticket-route">
+                <div>
+                    <small>FROM</small>
+                    <strong>Chennai</strong>
+                </div>
+
+                <span>→</span>
+
+                <div>
+                    <small>TO</small>
+                    <strong>Bengaluru</strong>
+                </div>
+            </div>
+
+            <div class="ticket-details">
+
+                <div>
+                    <small>DATE</small>
+                    <strong id="confirmationDate"></strong>
+                </div>
+
+                <div>
+                    <small>DEPARTURE</small>
+                    <strong>09:30 PM</strong>
+                </div>
+
+                <div>
+                    <small>SEATS</small>
+                    <strong id="confirmationSeats"></strong>
+                </div>
+
+                <div>
+                    <small>TOTAL</small>
+                    <strong id="confirmationTotal"></strong>
+                </div>
+
+            </div>
+
+            <div class="ticket-passengers">
+                <div class="ticket-passenger-header">
+                    <span>PASSENGER</span>
+                    <span>SEAT</span>
+                </div>
+
+                <div id="confirmationPassengers"></div>
+            </div>
+
+        </div>
+
+        <div class="confirmation-actions">
+
+            <button class="primary-btn" onclick="downloadTicket()">
+                Download E-Ticket
+            </button>
+
+            <button class="secondary-btn" onclick="showHome()">
+                Back to HERMEX
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="bookingsPage" class="page">
+
+    <div class="page-container">
+
+        <button class="back-btn" onclick="showHome()">← Home</button>
+
+        <div class="section-title">
+            <div>
+                <span class="eyebrow">MY TRIPS</span>
+                <h2>Your bookings</h2>
+            </div>
+        </div>
+
+        <div id="bookingsList"></div>
+
+    </div>
+
+</section>
+
+</main>
+
+<div id="toast" class="toast"></div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
