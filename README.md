@@ -135,9 +135,11 @@ The project combines:
 - Synchronization
 - Web Development
 - User Interface Design
+
 Author
 Bala ES
 CSE (AI/ML)
 SRM Institute of Science and Technology
+
 License
 This project is developed for educational and academic purposes.
